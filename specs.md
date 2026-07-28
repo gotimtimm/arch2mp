@@ -1,107 +1,113 @@
-Introduction
+# Acceleration Matrix Program Specification
 
-A car's peformance is usually measured using an acceleration test with a 1KM distance. Some cars are measured from a cold start (they start at 0KM/H), some are tested from a hot start (the car is running at a stable speed and then accelerates).
+## Introduction
 
-Factors that are needed to compute acceleration (m/s2):
+A car's performance is usually measured using an acceleration test over a 1 km distance. Some cars are tested from a cold start (starting at 0 km/h), while others are tested from a hot start (already running at a stable speed).
 
-1. Initial Velocity (Vi) - starting speed.
+## Acceleration Factors
 
-2. Final Velocity (Vf) - final speed at the target distance (1KM).
+To compute acceleration in m/s², the following values are required:
 
-3. Time (T) - the total time consumed to reach 1KM.
+1. **Initial Velocity (Vi)** - starting speed in km/h
+2. **Final Velocity (Vf)** - final speed at the target distance in km/h
+3. **Time (T)** - total time to reach 1 km in seconds
 
-The formula for acceleration is:
+### Formula
 
-Acceleration = (Vf - Vi)/T
+```
+Acceleration = (Vf - Vi) / T
+```
 
-Sample Computation:
+### Example Calculation
 
-Vi =62.5 KM/H
+- Vi = 62.5 km/h
+- Vf = 0.0 km/h
+- T = 10.1 s
 
-Vf = 0.0 KM/H
+```
+Acceleration = (62.5 km/h - 0.0 km/h) / 10.1 s
+             = 62.5 km/h / 10.1 s
+             = convert km/h to m/s
+             = (62.5 * 1000 m) / (3600 s) / 10.1 s
+             = 17.36 m/s / 10.1 s
+             = 1.7188 m/s²
+             ≈ 2 m/s² (converted to integer)
+```
 
-T = 10.1 s
+## Task
 
-Acceleration  = (62.5KM/H - 0.0KM/H) / 10.1s
+Implement a program that computes the acceleration values for multiple cars stored in a `Y x 3` matrix, where `Y` is the number of cars.
 
-                       = (62.5KM/H) / 10.1s
+- Input values are double-precision floating point.
+- Output acceleration for each car must be converted to integers.
+- Each row contains: `Initial Velocity (km/h)`, `Final Velocity (km/h)`, `Time (s)`.
 
-                       = Convert KM/H to m/s
+### Sample Matrix
 
-                       = ([62.5KM/H * 1000M/H] * 1m/3600s )/ 10.1s
+```
+0.0,   62.5,  10.1
+60.0, 122.3,   5.5
+30.0, 160.7,   7.8
+```
 
-                       = (17.36M/s) / 10.1s
+## Requirements
 
-                       = 1.7188 m/s2
+- Use functional scalar SIMD registers.
+- Use functional scalar SIMD floating-point instructions.
 
-                               = convert to int (1.7188 m/s2) = 2 m/s2
+## Input Format
 
-Task
+The program must accept:
 
-Implement a program that computes for the acceleration of multiple cars stored in a Y by 3 matrix. Where Y is the number of cars. All inputs are in double floating point.
+1. Number of matrix rows (`Y`)
+2. `Y` rows of matrix values
 
-The output acceleration for each will be converted into Integers.
+### Example Input
 
-Each row will indicate Initial Velocity (in KM/H), Final Velocity (in KM/H), and Time (in Seconds).
-
-Sample Matrix:
-
-0.0, 62.5, 10.1
-
-60.0, 122.3, 5.5
-
-30.0, 160.7, 7.8
-
-*Required to use functional scalar SIMD registers
-
-*Required to use functional scalar SIMD floating-point instructions
-
-Input: Matrix Rows, single float matrix values
-
-Example.
-
+```
 3
-
 0.0, 62.5, 10.1
-
 60.0, 122.3, 5.5
-
 30.0, 160.7, 7.8
+```
 
- 
+## Output Format
 
-Output: Integer acceleration values (m/s2)
+The program should print integer acceleration values in m/s², one per line.
 
-Example.
+### Example Output
 
+```
 2
-
 3
-
 5
+```
 
-Note:
+## Notes
 
-1.) C is responsible for: collecting the inputs, allocating memory spaces for the images, and printing the outputs.
+1. **C is responsible for:**
+   - collecting inputs
+   - allocating memory
+   - printing outputs
 
-2.) Function implemented in assembly is responsible for converting velocity to m/s, calculating acceleration and converting the data type from the input double float into the output integer.
+2. **Assembly is responsible for:**
+   - converting velocity from km/h to m/s
+   - computing acceleration
+   - converting from double to integer output
 
-3.) Time the asm function only for input Y size = {10, 100, 1000, 10000}.  If 10000 is impossible, you may reduce it to the point your machine can support. You may use a random number generator to generate values for the input.
+3. Time the assembly function only for input sizes: `10`, `100`, `1000`, and `10000`.
+   - If `10000` is impossible, reduce the size to the maximum your machine can support.
+   - You may use random values to generate input data.
 
-4.) You must run at least 30 times to get the average execution time. 
+4. Run at least 30 repetitions to compute average execution time.
 
-5.) For the data, you may initialize each input with the same or different random value. 
+5. Input data may be initialized with the same or different random values.
 
-6.) You will need to check the correctness of your output.  
+6. Verify the correctness of outputs.
 
-7.) Output in GitHub (make sure that I can access your Github):
-
-a.) Github readme containing the following (C and x86-64):
-
-     i.) execution time and short analysis of the performance
-
-    ii.) Take a screenshot of the program output with the correctness check.
-
-iii.) short videos (5-10mins) showing your source code, compilation, and execution of the C and x86-64 program
-
-b.) Submit all files needed to run your project. (source code: C, x86-64, and all other required files) for others to load and execute your program.
+7. GitHub submission should include:
+   - A README with:
+     - execution times and a short performance analysis
+     - a screenshot of program output and correctness check
+     - short videos (5–10 minutes) showing source code, compilation, and execution for both C and x86-64
+   - All source files needed to run the project (`C`, `x86-64`, and any other required files)
