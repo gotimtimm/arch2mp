@@ -30,9 +30,16 @@ The result is converted to an integer (rounded to nearest).
 
 ## Build Instructions
 
+**Using Make (Recommended):**
+```bash
+# using MinGW Make
+mingw32-make
+```
+
+**Manual Compilation:**
 ```bash
 nasm -f win64 accel.asm -o accel.obj
-gcc -O2 -o arch2mp.exe main.c accel.obj
+gcc -O2 -Wall -m64 -o arch2mp.exe main.c accel.obj
 ```
 
 ## Running
