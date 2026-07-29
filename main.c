@@ -21,7 +21,7 @@ void c_calc_accel(double* input, int* output, int num_cars) {
 
         double delta_v = (vf - vi) * 1000.0 / 3600.0;
         double accel = delta_v / t;
-        output[i] = (int)round(accel);
+        output[i] = (int)rint(accel);
     }
 }
 
