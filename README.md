@@ -39,21 +39,19 @@ mingw32-make
 **Manual Compilation:**
 ```bash
 nasm -f win64 accel.asm -o accel.obj
-gcc -O2 -Wall -m64 -o arch2mp.exe main.c accel.obj
+gcc -O2 -Wall -m64 -o lbyarch-mp.exe main.c accel.obj
 ```
 
 ## Running
 
 ```bash
-arch2mp.exe
+lbyarch-mp.exe
 ```
 
 ### Sample Input
 ```
 3
-0.0, 62.5, 10.1
-60.0, 122.3, 5.5
-30.0, 160.7, 7.8
+0.0, 62.5, 10.1, 60.0, 122.3, 5.5, 30.0, 160.7, 7.8
 ```
 
 ### Expected Output
@@ -69,16 +67,16 @@ The assembly function was benchmarked over **30 iterations** for each input size
 
 | Y (cars) | Avg Execution Time (ms) | Correctness |
 |-----------|-------------------------|-------------|
-| 10        |                         |             |
-| 100       |                         |             |
-| 1,000     |                         |             |
-| 10,000    |                         |             |
+| 10        | 0.000040                | PASSED      |
+| 100       | 0.000193                | PASSED      |
+| 1,000     | 0.002257                | PASSED      |
+| 10,000    | 0.018027                | PASSED      |
 
-**Analysis:** *(To be filled after running benchmarks)*
+**Analysis:** As expected, the average execution time increases as the number of cars increases. Although this value may vary because the program benchmark uses wall-clock time and not CPU time. This is not indicative of the actual performance of the program. Just simply run the program again.
 
 ## Program Output Screenshots
 
-*(To be added — screenshot showing sample input/output and correctness check)*
+![Program Output and Correctness Check](program_output.png)
 
 ## Video Demo
 

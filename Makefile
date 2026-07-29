@@ -2,7 +2,7 @@ CC      = gcc
 ASM     = nasm
 CFLAGS  = -O2 -Wall -m64
 ASMFLAGS = -f win64
-TARGET  = arch2mp.exe
+TARGET  = lbyarch-mp.exe
 
 all: $(TARGET)
 
