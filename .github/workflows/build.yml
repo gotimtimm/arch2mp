@@ -1,0 +1,31 @@
+name: Build
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["**"]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install NASM
+        run: choco install nasm --no-progress -y
+
+      - name: Build
+        run: |
+          $env:PATH = "C:\Program Files\NASM;C:\msys64\mingw64\bin;C:\msys64\usr\bin;$env:PATH"
+          make
+        shell: powershell
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: arch2mp
+          path: arch2mp.exe
+          retention-days: 7
