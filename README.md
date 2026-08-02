@@ -80,4 +80,4 @@ The assembly function was benchmarked over **30 iterations** for each input size
 
 ## Video Demo
 
-*(To be added — 5-10 min video showing source code walkthrough, compilation, and execution)*
+[Video Demo - Source Code Walkthrough, Compilation, and Execution](2026-08-02%2020-00-29.mp4)
